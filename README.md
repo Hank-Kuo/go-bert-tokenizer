@@ -1,16 +1,16 @@
 # go-bert-tokenizer
 Implement bert tokenizer by go. 
-Follow this Bert tokenzier 
+Follow Bert tokenzier algo
 
 ## Usage
 
 ### FullTokenizer
 ```go
 import (
-    tokenizer "go-bert-tokenizer"
+    tokenizer "github.com/Hank-Kuo/go-bert-tokenizer"
 )
 
-voc, _ := tokenizer.FromFile("./vocab.txt") // load vocab for vocab file 
+voc, _ := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
 
 tkz := tokenizer.NewFullTokenizer(voc1, 128, true) 
 encoding := tkz.Tokenize(sentence)
@@ -24,9 +24,11 @@ fmt.Println(encoding.TypeIDs)
 
 ### WordpieceTokenizer
 ```go
-import "go-bert-tokenizer/tokenizer"
+import (
+    tokenizer "github.com/Hank-Kuo/go-bert-tokenizer"
+)
 
-voc, _ := tokenizer.FromFile("./vocab.txt") // load vocab for vocab file 
+voc, _ := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
 
 tkz := tokenizer.NewFullTokenizer(voc1, 128, true) 
 encoding := tkz.Tokenize(sentence)
@@ -39,9 +41,11 @@ fmt.Println(encoding.TypeIDs)
 
 ### BasicTokenizer
 ```go
-import "go-bert-tokenizer/tokenizer"
+import (
+    tokenizer "github.com/Hank-Kuo/go-bert-tokenizer"
+)
 
-voc, _ := tokenizer.FromFile("./vocab.txt") // load vocab for vocab file 
+voc, _ := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
 seqLen, lower := 128, true
 tkz := tokenizer.NewFullTokenizer(voc1, seqLen, lower) 
 encoding := tkz.Tokenize(sentence)
