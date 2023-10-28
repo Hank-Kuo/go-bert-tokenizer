@@ -3,7 +3,7 @@ Implement bert tokenizer by go.
 
 Document:https://pkg.go.dev/github.com/Hank-Kuo/go-bert-tokenizer
 
-Follow Bert tokenzier algo, reference: [bert repo](https://www.bing.com/search?q=bert+github&cvid=15aae2d483144d39bfe0fa318ff0fa98&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDwyBggCEEUYPDIGCAMQRRg8MgYIBBBFGEHSAQgzMTc4ajBqMagCALACAA&FORM=ANNTA1&PC=U531)
+Follow Bert tokenzier algo, reference: [bert repo](https://github.com/google-research/bert)
 
 Valify Hugging face python code. 
 ```python
