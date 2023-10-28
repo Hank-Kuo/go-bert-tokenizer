@@ -1,4 +1,4 @@
-module go-bert-tokenizer
+module github.com/Hank-Kuo/go-bert-tokenizer
 
 go 1.21.0
 

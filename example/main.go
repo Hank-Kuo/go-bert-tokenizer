@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	tokenizer "go-bert-tokenizer"
+
+	tokenizer "github.com/Hank-Kuo/go-bert-tokenizer"
 )
 
 func main() {
