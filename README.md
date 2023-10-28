@@ -35,8 +35,11 @@ import (
     tokenizer "github.com/Hank-Kuo/go-bert-tokenizer"
 )
 sentence := "This is a test case !!!!"
-s
-voc, _ := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
+
+voc, err := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
+if err != nil {
+    panic(err)
+}
 tkz := tokenizer.NewFullTokenizer(voc, 128, true) 
 encoding := tkz.Tokenize(sentence)
 fmt.Println(encoding.Text)
@@ -55,7 +58,10 @@ import (
 
 sentence := "This is a test case !!!!"
 
-voc, _ := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
+voc, err := tokenizer.FromFile("./tmp/vocab.txt") // load vocab for vocab file 
+if err != nil {
+    panic(err)
+}
 tkz := tokenizer.NewWordpieceTokenizer(voc, true) 
 encoding := tkz.Tokenize(sentence)
 fmt.Println(encoding)

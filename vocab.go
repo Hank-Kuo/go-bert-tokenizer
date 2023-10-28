@@ -5,14 +5,8 @@ import (
 	"os"
 )
 
-type ID int32
-
-func (id ID) Int32() int32 {
-	return int32(id)
-}
-
 type Vocab struct {
-	tokens map[string]ID
+	tokens map[string]int32
 }
 
 func FromFile(path string) (*Vocab, error) {
@@ -22,7 +16,7 @@ func FromFile(path string) (*Vocab, error) {
 	}
 	defer f.Close()
 	scanner := bufio.NewScanner(f)
-	voc := &Vocab{tokens: map[string]ID{}}
+	voc := &Vocab{tokens: map[string]int32{}}
 	for scanner.Scan() {
 		voc.Add(scanner.Text())
 	}
@@ -30,29 +24,29 @@ func FromFile(path string) (*Vocab, error) {
 }
 
 func New(tokens []string) *Vocab {
-	v := make(map[string]ID, len(tokens))
+	v := make(map[string]int32, len(tokens))
 	for i, t := range tokens {
-		v[t] = ID(i)
+		v[t] = int32(i)
 	}
 	return &Vocab{tokens: v}
 }
 
 func (v *Vocab) Add(token string) {
-	v.tokens[token] = ID(v.Size())
+	v.tokens[token] = int32(v.Size())
 }
 
-func (v *Vocab) GetID(token string) ID {
+func (v *Vocab) GetID(token string) int32 {
 	id, ok := v.tokens[token]
 	if !ok {
-		return ID(-1)
+		return int32(-1)
 	}
-	return ID(id)
+	return int32(id)
 }
 
 func (v *Vocab) Size() int {
 	return len(v.tokens)
 }
 
-func (v *Vocab) GetToken() map[string]ID {
+func (v *Vocab) GetToken() map[string]int32 {
 	return v.tokens
 }

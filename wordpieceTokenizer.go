@@ -8,27 +8,27 @@ const DefaultMaxWordChars = 200
 const DefaultUnknownToken = "[UNK]"
 
 type WordpieceTokenizer struct {
-	vocab        *Vocab
-	maxWordChars int
-	unknownToken string
+	Vocab        *Vocab
+	MaxWordChars int
+	UnknownToken string
 }
 
 func NewWordpieceTokenizer(voc *Vocab) *WordpieceTokenizer {
 	return &WordpieceTokenizer{
-		vocab:        voc,
-		maxWordChars: DefaultMaxWordChars,
-		unknownToken: DefaultUnknownToken,
+		Vocab:        voc,
+		MaxWordChars: DefaultMaxWordChars,
+		UnknownToken: DefaultUnknownToken,
 	}
 }
 
-func (wp *WordpieceTokenizer) Tokenize(text string) []string {
+func (tkz *WordpieceTokenizer) Tokenize(text string) []string {
 
 	var toks []string
 
 	for _, tok := range tokenizeWhitespace(text) {
 		char := strings.Split(tok, "")
-		if len(char) > wp.maxWordChars {
-			toks = append(toks, wp.unknownToken)
+		if len(char) > tkz.MaxWordChars {
+			toks = append(toks, tkz.UnknownToken)
 			continue
 		}
 
@@ -45,7 +45,7 @@ func (wp *WordpieceTokenizer) Tokenize(text string) []string {
 					substr = "##" + substr
 				}
 
-				if _, ok := wp.vocab.GetToken()[substr]; ok {
+				if _, ok := tkz.Vocab.GetToken()[substr]; ok {
 					curSubStr = substr
 					break
 				}
@@ -60,7 +60,7 @@ func (wp *WordpieceTokenizer) Tokenize(text string) []string {
 		}
 
 		if isBad {
-			toks = append(toks, wp.unknownToken)
+			toks = append(toks, tkz.UnknownToken)
 		} else {
 			toks = append(toks, sub_tokens...)
 		}
@@ -69,10 +69,10 @@ func (wp *WordpieceTokenizer) Tokenize(text string) []string {
 	return toks
 }
 
-func (wp *WordpieceTokenizer) SetMaxWordChars(c int) {
-	wp.maxWordChars = c
+func (tkz *WordpieceTokenizer) SetMaxWordChars(c int) {
+	tkz.MaxWordChars = c
 }
 
-func (wp *WordpieceTokenizer) SetUnknownToken(tok string) {
-	wp.unknownToken = tok
+func (tkz *WordpieceTokenizer) SetUnknownToken(tok string) {
+	tkz.UnknownToken = tok
 }

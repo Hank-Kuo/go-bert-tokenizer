@@ -11,10 +11,15 @@ func main() {
 
 	// FullTokenizer
 	seqLen, lower := 128, true
-	voc, _ := tokenizer.FromFile("../tmp/vocab.txt")
+	voc, err := tokenizer.FromFile("./tmp/vocab.txt")
+	if err != nil {
+		panic(err)
+	}
 	tkz := tokenizer.NewFullTokenizer(voc, seqLen, lower)
 	for _, sentence := range sentences {
 		fmt.Println(tkz.Tokenize(sentence).TokenIDs)
+		fmt.Println(tkz.Tokenize(sentence).MaskIDs)
+		fmt.Println(tkz.Tokenize(sentence).TypeIDs)
 	}
 
 	// Basic Tokenizer

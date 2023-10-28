@@ -15,13 +15,13 @@ func NewBasicTokenizer(lower bool) *BasicTokenizer {
 	return &BasicTokenizer{Lower: lower}
 }
 
-func (bt *BasicTokenizer) Tokenize(text string) []string {
+func (tkz *BasicTokenizer) Tokenize(text string) []string {
 	text = clean(text)
 	text = padChinese(text)
 
 	var toks []string
 	for _, tok := range tokenizeWhitespace(text) {
-		if bt.Lower {
+		if tkz.Lower {
 			tok = strings.ToLower(tok)
 			tok = stripAccents(tok)
 		}

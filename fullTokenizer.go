@@ -11,7 +11,6 @@ const (
 )
 
 type Encode struct {
-	ID       int32
 	Text     string
 	Tokens   []string
 	TokenIDs []int32
@@ -51,25 +50,25 @@ func (tkz *FullTokenizer) Tokenize(text string) *Encode {
 
 	truncate(seqs, tkz.SeqLen-len(seqs)-1)
 
-	voc := tkz.Wordpiece.vocab
+	voc := tkz.Wordpiece.Vocab
 
 	var s int
 	encode.Tokens[s] = ClassToken
-	encode.TokenIDs[s] = voc.GetID(ClassToken).Int32()
+	encode.TokenIDs[s] = voc.GetID(ClassToken)
 	encode.TypeIDs[s] = 0
 	encode.MaskIDs[s] = 1
 	s++
 	for sid, seq := range seqs {
 		for _, tok := range seq {
 			encode.Tokens[s] = tok
-			encode.TokenIDs[s] = voc.GetID(tok).Int32()
+			encode.TokenIDs[s] = voc.GetID(tok)
 			encode.TypeIDs[s] = int32(sid)
 			encode.MaskIDs[s] = 1
 			s++
 
 		}
 		encode.Tokens[s] = SeparatorToken
-		encode.TokenIDs[s] = voc.GetID(SeparatorToken).Int32()
+		encode.TokenIDs[s] = voc.GetID(SeparatorToken)
 		encode.TypeIDs[s] = int32(sid)
 		encode.MaskIDs[s] = 1
 		s++
@@ -77,10 +76,10 @@ func (tkz *FullTokenizer) Tokenize(text string) *Encode {
 	return encode
 }
 
-func (f *FullTokenizer) tokenize(text string) []string {
+func (tkz *FullTokenizer) tokenize(text string) []string {
 	var toks []string
-	for _, tok := range f.Basic.Tokenize(text) {
-		toks = append(toks, f.Wordpiece.Tokenize(tok)...)
+	for _, tok := range tkz.Basic.Tokenize(text) {
+		toks = append(toks, tkz.Wordpiece.Tokenize(tok)...)
 	}
 	return toks
 }
