@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	sentences := []string{"Hello world Hello This is ā text!!! 你好呀 "}
+	sentences := []string{"Hello world, This is ā text!!! 你好呀 "}
 
 	// FullTokenizer
 	seqLen, lower := 128, true
